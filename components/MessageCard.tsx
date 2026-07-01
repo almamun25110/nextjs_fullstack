@@ -22,7 +22,7 @@ import { ApiResponse } from '@/types/ApiResponse';
 
 type MessageCardProps = {
   message: Message;
-  onMessageDelete: (messageId: string) => void;
+  onMessageDelete: (messageid: any ) => void;
 };
 
 export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
@@ -35,7 +35,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
        toast("Success", {
          description: response.data.message,
         })
-       onMessageDelete(message._id.toString());
+       onMessageDelete(message._id);
 
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;

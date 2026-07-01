@@ -6,10 +6,13 @@ import { authOptions } from '../../auth/[...nextauth]/options';
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ messageId: string }> }
+  { params }: { params: Promise<{ messageid: string }> }
 ) {
-  const resolvedParams = await params; 
-  const messageId = resolvedParams.messageId;
+  const { messageid } = await params;
+  // console.log('params:', resolvedParams);
+  // console.log("keys:", Object.keys(resolvedParams));
+  // const messageId = resolvedParams.messageId;
+  // console.log('messageId:', messageid);
   await dbConnect();
 
   const session = await getServerSession(authOptions);
@@ -24,9 +27,12 @@ export async function DELETE(
   try {
     const updateResult = await UserModel.updateOne(
       { _id: _user._id },
-      { $pull: { messages: { _id: messageId } } }
+      { $pull: { 
+        messages: { 
+          _id: messageid } } }
     );
 
+    // console.log('UpdateResult:', updateResult);
     if (updateResult.modifiedCount === 0) {
       return Response.json(
         { message: 'Message not found or already deleted', success: false },
