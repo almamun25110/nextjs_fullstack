@@ -18,7 +18,7 @@ import { signUpSchema } from '@/schemas/signUpSchema';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 
 export default function SignUpForm() {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState('');
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
